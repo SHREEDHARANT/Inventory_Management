@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-boxes"></i>
+                    <h1>Inventory Manager</h1>
+                </div>
+                <nav class="nav-menu">
+                    <button class="nav-btn active" data-page="dashboard">
+                        <i class="fas fa-chart-bar"></i>
+                        Dashboard
+                    </button>
+                    <button class="nav-btn" data-page="products">
+                        <i class="fas fa-box"></i>
+                        Products
+                    </button>
+                    <button class="nav-btn" data-page="locations">
+                        <i class="fas fa-warehouse"></i>
+                        Locations
+                    </button>
+                    <button class="nav-btn" data-page="movements">
+                        <i class="fas fa-exchange-alt"></i>
+                        Movements
+                    </button>
+                    <button class="nav-btn" data-page="reports">
+                        <i class="fas fa-file-alt"></i>
+                        Reports
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <h1><i class="fas fa-chart-bar"></i> Inventory Dashboard</h1>
+                            <p>Welcome to your Professional Inventory Management System</p>
+                            <div class="hero-features">
+                                <span class="feature-tag"><i class="fas fa-check-circle"></i> Real-time Tracking</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle"></i> Advanced Analytics</span>
+                                <span class="feature-tag"><i class="fas fa-check-circle"></i> Professional Reports</span>
+                            </div>
+                        </div>
+                        <div class="hero-image">
+                            <img src="attached_assets/stock_images/professional_busines_0881e5a3.jpg" alt="Professional Dashboard" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon products">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-products">0</h3>
+                            <p>Total Products</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon locations">
+                            <i class="fas fa-warehouse"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-locations">0</h3>
+                            <p>Total Locations</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon movements">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-movements">0</h3>
+                            <p>Total Movements</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon stock">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-stock">0</h3>
+                            <p>Total Stock</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-charts">
+                    <div class="chart-card">
+                        <h3>Recent Activity</h3>
+                        <div id="recent-activity" class="activity-list">
+                            <!-- Recent activities will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Page -->
+            <div id="products" class="page">
+                <div class="page-header">
+                    <h2><i class="fas fa-box"></i> Product Management</h2>
+                    <button class="btn btn-primary" onclick="showAddProductModal()">
+                        <i class="fas fa-plus"></i> Add Product
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table">
+                            <!-- Products will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Locations Page -->
+            <div id="locations" class="page">
+                <div class="page-header">
+                    <h2><i class="fas fa-warehouse"></i> Location Management</h2>
+                    <button class="btn btn-primary" onclick="showAddLocationModal()">
+                        <i class="fas fa-plus"></i> Add Location
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Location ID</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="locations-table">
+                            <!-- Locations will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Movements Page -->
+            <div id="movements" class="page">
+                <div class="page-header">
+                    <h2><i class="fas fa-exchange-alt"></i> Product Movements</h2>
+                    <button class="btn btn-primary" onclick="showAddMovementModal()">
+                        <i class="fas fa-plus"></i> Add Movement
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Movement ID</th>
+                                <th>Timestamp</th>
+                                <th>Product</th>
+                                <th>From Location</th>
+                                <th>To Location</th>
+                                <th>Quantity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="movements-table">
+                            <!-- Movements will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reports Page -->
+            <div id="reports" class="page">
+                <div class="page-header">
+                    <h2><i class="fas fa-file-alt"></i> Inventory Reports</h2>
+                    <button class="btn btn-secondary" onclick="generateReport()">
+                        <i class="fas fa-sync"></i> Refresh Report
+                    </button>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Location</th>
+                                <th>Current Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reports-table">
+                            <!-- Report will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Add/Edit Product -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="product-modal-title">Add Product</h3>
+                <span class="close" onclick="closeProductModal()">&times;</span>
+            </div>
+            <form id="product-form">
+                <div class="form-group">
+                    <label for="product-id">Product ID:</label>
+                    <input type="text" id="product-id" name="product_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-name">Product Name:</label>
+                    <input type="text" id="product-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description:</label>
+                    <textarea id="product-description" name="description" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeProductModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit Location -->
+    <div id="location-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="location-modal-title">Add Location</h3>
+                <span class="close" onclick="closeLocationModal()">&times;</span>
+            </div>
+            <form id="location-form">
+                <div class="form-group">
+                    <label for="location-id">Location ID:</label>
+                    <input type="text" id="location-id" name="location_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="location-name">Location Name:</label>
+                    <input type="text" id="location-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="location-address">Address:</label>
+                    <textarea id="location-address" name="address" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeLocationModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Location</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit Movement -->
+    <div id="movement-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="movement-modal-title">Add Movement</h3>
+                <span class="close" onclick="closeMovementModal()">&times;</span>
+            </div>
+            <form id="movement-form">
+                <div class="form-group">
+                    <label for="movement-product">Product:</label>
+                    <select id="movement-product" name="product_id" required>
+                        <option value="">Select Product</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="movement-from">From Location:</label>
+                    <select id="movement-from" name="from_location">
+                        <option value="">Select Location (Optional)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="movement-to">To Location:</label>
+                    <select id="movement-to" name="to_location">
+                        <option value="">Select Location (Optional)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="movement-quantity">Quantity:</label>
+                    <input type="number" id="movement-quantity" name="qty" min="1" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeMovementModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Movement</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h3>Confirm Action</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">Are you sure you want to perform this action?</p>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeConfirmModal()">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirm-action-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
